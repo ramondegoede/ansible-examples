@@ -12,6 +12,7 @@
     - common
 
 - name: configure and deploy the webservers and application code
+  hosts: all
   become: yes
   become_method: sudo
 
@@ -19,6 +20,7 @@
     - web
 
 - name: deploy MySQL and configure the databases
+  hosts: all
   become: yes
   become_method: sudo
   remote_user: root
