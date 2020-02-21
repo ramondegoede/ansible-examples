@@ -1,16 +1,25 @@
 ---
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
+  become: yes
+  become_method: sudo
+  
 
 - name: Reload ansible_facts
   setup:
 
 - name: Copy the EPEL repository definition
   copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+  become: yes
+  become_method: sudo
 
 - name: Create the GPG key for EPEL
   copy: src=RPM-GPG-KEY-EPEL-6 dest=/etc/pki/rpm-gpg
+  become: yes
+  become_method: sudo
 
 - name: Set up iptables rules
   copy: src=iptables-save dest=/etc/sysconfig/iptables
   notify: restart iptables
+  become: yes
+  become_method: sudo
